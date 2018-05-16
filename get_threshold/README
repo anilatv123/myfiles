@@ -1,0 +1,17 @@
+Read threshold value plugin
+----------------------------
+
+This is a third party web service to read the threshold value from the moodle database. This web service returns the threshold value stored for a particular courseid. This web service requires the courseid as an input parameter. 
+
+To make the webservice working:
+1- install the plugin in moodle/local/get_threshold
+2- Read, setup and run moodle/local/get_threshold/client/client.php
+
+Features:
+---------
+Protocol used: REST
+Result format: XML or JSON
+Function name: get_data
+Input parameter: courseid	
+
+Security is also taken into account by cross checking the token of the user with the token provided in the webservice call.
