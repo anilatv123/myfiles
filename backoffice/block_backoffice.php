@@ -10,9 +10,9 @@ class block_backoffice extends block_base {
         if ($this->config === null) {
             $this->config = new stdClass();
         }
-        // Set always show_dedication config settings to avoid errors.
-        if (!isset($this->config->show_dedication)) {
-            $this->config->show_dedication = 0;
+        // Set always show_threshold config settings to avoid errors.
+        if (!isset($this->config->show_threshold)) {
+            $this->config->show_threshold = 0;
         }
     }
 
@@ -27,20 +27,9 @@ class block_backoffice extends block_base {
             $this->content = '';
             return $this->content;
         }
-
         $this->content = new stdClass();
         $this->content->text = '';
         $this->content->footer = '';
-
-        if ($this->config->show_dedication == 1) {
-           // require_once('dedication_lib.php');
-            $mintime = $this->page->course->startdate;
-            $maxtime = time();
-         //   $dm = new block_dedication_manager($this->page->course, $mintime, $maxtime, $this->config->limit);
-           // $dedicationtime = $dm->get_user_dedication($USER, true);
-            $this->content->text .= html_writer::tag('p', get_string('dedication_estimation', 'block_backoffice'));
-          //  $this->content->text .= html_writer::tag('p', block_dedication_utils::format_dedication($dedicationtime));
-        }
 
         if (has_capability('block/backoffice:use', context_block::instance($this->instance->id))) {
             $this->content->footer .= html_writer::tag('hr', null);
@@ -53,7 +42,7 @@ class block_backoffice extends block_base {
         }
 
         return $this->content;
-    }
+	}
 
     public function applicable_formats() {
         return array('course' => true);

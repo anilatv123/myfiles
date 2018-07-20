@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="blocks/dedication/db" VERSION="20180323" COMMENT="XMLDB file for Moodle blocks/backoffice"
+<XMLDB PATH="blocks/dedication/db" VERSION="20180621" COMMENT="XMLDB file for Moodle blocks/backoffice"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -8,10 +8,15 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true" COMMENT="to store autoincrementid"/>
         <FIELD NAME="courseid" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="This id gives the details of a particular course"/>
+        <FIELD NAME="startcoursedate" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="To store the starting date of the course."/>
         <FIELD NAME="post_high" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="This field is used to store the maximum of posts in a forum for a particular course."/>
         <FIELD NAME="post_low" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="This field is used to store the minimum number of posts required in a forum for a particular course."/>
         <FIELD NAME="login_high" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="This field is used to store the maximum attendance for the particular course"/>
         <FIELD NAME="login_low" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="To store the minimum attendance required for the particular course."/>
+        <FIELD NAME="login_importance" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="To store the percentage of importance for attendance."/>
+        <FIELD NAME="post_importance" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="To store the percentage of importance for post."/>
+        <FIELD NAME="assid_low" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Attendance low"/>
+        <FIELD NAME="assid_high" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Attendance high"/>
         <FIELD NAME="aprov_high" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="This field is used to store the maximum grade for the course"/>
         <FIELD NAME="aprov_low" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="To store the minimum grade required for the particular course."/>
       </FIELDS>
