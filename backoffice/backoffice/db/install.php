@@ -28,5 +28,5 @@ xmldb_qtype_myqtype_install();
         // Backoffice savepoint reached.
         upgrade_block_savepoint(true, 2017042620, 'backoffice');
     }
-}
+
 ?>
