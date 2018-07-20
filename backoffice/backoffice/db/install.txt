@@ -1,0 +1,24 @@
+<?php
+    if ($oldversion < 3.0) {
+
+        // Define table threshold to be created.
+        $table = new xmldb_table('threshold');
+
+        // Adding fields to table threshold.
+        $table->add_field('courseid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('min_attendance', XMLDB_TYPE_INTEGER, '20', null, null, null, null);
+        $table->add_field('max_attendance', XMLDB_TYPE_INTEGER, '20', null, null, null, null);
+        $table->add_field('min_grade', XMLDB_TYPE_INTEGER, '20', null, null, null, null);
+        $table->add_field('max_grade', XMLDB_TYPE_INTEGER, '20', null, null, null, null);
+
+        // Adding keys to table threshold.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('courseid'));
+
+        // Conditionally launch create table for threshold.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Dedication savepoint reached.
+        upgrade_block_savepoint(true, XXXXXXXXXX, 'dedication');
+    }
