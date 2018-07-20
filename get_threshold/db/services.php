@@ -13,7 +13,7 @@ $functions = array(
 
 // We define the services to install as pre-build services. A pre-build service is not editable by administrator.
 $services = array(
-        'Read Threshold' => array(
+        'Read_Threshold' => array(
                 'functions' => array ('get_data'),
                 'restrictedusers' => 0,
                 'enabled'=>1,
