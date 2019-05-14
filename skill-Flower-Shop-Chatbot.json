@@ -1,0 +1,714 @@
+{
+  "name": "Flower Shop Chatbot",
+  "intents": [
+    {
+      "intent": "thankyou",
+      "examples": [
+        {
+          "text": "Thnak you"
+        },
+        {
+          "text": "Thank you"
+        },
+        {
+          "text": "I am grateful"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "flower_suggestions",
+      "examples": [
+        {
+          "text": "I need flower suggestion for celebrating birthday of my daughter"
+        },
+        {
+          "text": "anniversary"
+        },
+        {
+          "text": "Present flower for valentine's day"
+        },
+        {
+          "text": "Funeral"
+        },
+        {
+          "text": "I am going to visit my sick neighbour"
+        },
+        {
+          "text": "I would like flower suggestions for my wife"
+        }
+      ],
+      "description": "Suggestions for selecting a flower"
+    },
+    {
+      "intent": "greetings",
+      "examples": [
+        {
+          "text": "Good Afternoon"
+        },
+        {
+          "text": "Long time no see"
+        },
+        {
+          "text": "how are you"
+        },
+        {
+          "text": "Hello"
+        },
+        {
+          "text": "Hi"
+        },
+        {
+          "text": "Hey"
+        },
+        {
+          "text": "Good Morning"
+        },
+        {
+          "text": "Hai"
+        },
+        {
+          "text": "Ola"
+        },
+        {
+          "text": "Hella"
+        },
+        {
+          "text": "Good Evening"
+        }
+      ],
+      "description": "Greetings"
+    },
+    {
+      "intent": "anything_else",
+      "examples": [
+        {
+          "text": "ho"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "delivery_info",
+      "examples": [
+        {
+          "text": "How many days will it take to deliver my flowers?"
+        },
+        {
+          "text": "How long will it take?"
+        },
+        {
+          "text": "When will I receive my order?"
+        }
+      ],
+      "description": "Delivery related Information"
+    },
+    {
+      "intent": "goodbye",
+      "examples": [
+        {
+          "text": "See you later"
+        },
+        {
+          "text": "Good bye"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-person",
+      "values": []
+    },
+    {
+      "entity": "relation",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "child",
+          "synonyms": [
+            "daughter",
+            "son"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "neighbour",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "friend",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "colleague",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Girlfriend",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Husband",
+          "synonyms": [
+            "Boy friend"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "wife",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "gender",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Female",
+          "synonyms": [
+            "Woman"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Male",
+          "synonyms": [
+            "Man"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "responses",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Postive",
+          "synonyms": [
+            "Yes",
+            "Might be"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Negative",
+          "synonyms": [
+            "No",
+            "Never",
+            "Not Sure"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "occasion",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "funeral",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "birthday",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "valentine's day",
+          "synonyms": [
+            "valentine"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "visit to a sick person",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Anniversary",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "language": "en",
+  "metadata": {
+    "api_version": {
+      "major_version": "v1",
+      "minor_version": "2018-07-10"
+    }
+  },
+  "description": "",
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hi, Hope you are doing good. What do you like to know?"
+              },
+              {
+                "text": "Hello, I am here to help. Please feel free to ask if you would require any help."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_1_1556794035380",
+      "metadata": {},
+      "dialog_node": "node_2_1556795152283"
+    },
+    {
+      "type": "standard",
+      "title": "Suggestion Gender",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "A bouquet of White Roses will help you to please your partner."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1556803718667",
+      "metadata": {},
+      "conditions": "@gender:Male",
+      "dialog_node": "node_4_1556804011149",
+      "previous_sibling": "node_3_1556803827682"
+    },
+    {
+      "type": "standard",
+      "title": "Suggestion by Gender",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I would suggest you can order for a bonquet of Red Roses for your partner."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1556803718667",
+      "metadata": {},
+      "conditions": "@gender:Female",
+      "dialog_node": "node_3_1556803827682"
+    },
+    {
+      "type": "response_condition",
+      "output": {},
+      "parent": "node_7_1556796056389",
+      "disabled": true,
+      "metadata": {},
+      "dialog_node": "node_9_1556796266020"
+    },
+    {
+      "type": "standard",
+      "title": "Others Anniversary",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "You can choose either Lilies or Roses"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1556804795288",
+      "metadata": {},
+      "conditions": "@responses:Negative",
+      "dialog_node": "node_10_1556805313786",
+      "previous_sibling": "node_7_1556804956120"
+    },
+    {
+      "type": "standard",
+      "title": "Finding whose Anniversary",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Please specify the gender of your partner to help you more on this."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1556804795288",
+      "metadata": {},
+      "conditions": "@responses:Postive",
+      "dialog_node": "node_7_1556804956120"
+    },
+    {
+      "type": "standard",
+      "title": "Suggestion for wife",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I suggest you can order for a set of pink Roses."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1556804956120",
+      "metadata": {},
+      "conditions": "@gender:Female",
+      "dialog_node": "node_9_1556805152977",
+      "previous_sibling": "node_8_1556805025825"
+    },
+    {
+      "type": "standard",
+      "title": "Suggestion for gender",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "You can order for a banquet of orange and yellow flowers in this occasion."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1556804956120",
+      "metadata": {},
+      "conditions": "@gender:Male",
+      "dialog_node": "node_8_1556805025825"
+    },
+    {
+      "type": "response_condition",
+      "output": {},
+      "parent": "node_4_1556795920413",
+      "metadata": {},
+      "dialog_node": "node_6_1556796050584",
+      "previous_sibling": "node_1_1556797408627"
+    },
+    {
+      "type": "standard",
+      "title": "Occasion",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I am sorry to hear. Lilies arrangement with peaceful colors like white and green will be suitable for this occasion."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1556795920413",
+      "metadata": {},
+      "conditions": "@occasion:funeral",
+      "dialog_node": "node_1_1556797408627",
+      "previous_sibling": "node_2_1556803718667"
+    },
+    {
+      "type": "standard",
+      "title": "Anniversary Suggestions",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Is it your anniversary?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1556795920413",
+      "metadata": {},
+      "conditions": "@occasion:Anniversary",
+      "dialog_node": "node_5_1556804795288",
+      "previous_sibling": "node_7_1556796056389"
+    },
+    {
+      "type": "standard",
+      "title": "Valentine's Day",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Can you please let me know the gender of your partner so that I can suggest flowers accordingly."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1556795920413",
+      "metadata": {},
+      "conditions": "@occasion:(valentine's day)",
+      "dialog_node": "node_2_1556803718667",
+      "previous_sibling": "node_5_1556804795288"
+    },
+    {
+      "type": "standard",
+      "title": "Relationship Suggestions",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "You can choose a bunch of Red Rose to spread a smile on their face."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1556795920413",
+      "metadata": {
+        "_customization": {
+          "mcr": false
+        }
+      },
+      "conditions": "@relation:wife || @relation:Girlfriend",
+      "dialog_node": "node_7_1556796056389",
+      "digress_out": "allow_all"
+    },
+    {
+      "type": "standard",
+      "title": "Goodbyes",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Thank you for chatting with me today. Have a great day."
+              },
+              {
+                "text": "Thank you for chatting with me. Have a wonderful day."
+              },
+              {
+                "text": "Great talking to you. Hope to see you soon."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "#goodbye",
+      "dialog_node": "node_1_1556794819845",
+      "previous_sibling": "node_2_1556794338917"
+    },
+    {
+      "type": "standard",
+      "title": "Flower Suggestions",
+      "output": {},
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_7_1556796056389"
+      },
+      "conditions": "#flower_suggestions",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_4_1556795920413",
+      "digress_out": "allow_all",
+      "previous_sibling": "node_3_1556795839500"
+    },
+    {
+      "type": "standard",
+      "title": "Thank you",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "You are welcome. Is there anything else, you would like to know?"
+              },
+              {
+                "text": "Always happy to help you. Don't hesitate to ask, if you require anything else."
+              },
+              {
+                "text": "It is my pleasure to guide you. I am here for your help, please ask if you need support."
+              },
+              {
+                "text": "No problem."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "#thankyou",
+      "dialog_node": "node_2_1556794338917",
+      "previous_sibling": "node_1_1556794035380"
+    },
+    {
+      "type": "standard",
+      "title": "Delivery Information",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "You will receiver your flowers from 10 to 12 working days after you have placed your order. If you haven't received your flowers within these days please contact admin@flowershop.pt"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "#delivery_info",
+      "dialog_node": "node_3_1556795839500",
+      "previous_sibling": "node_11_1556880516079"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't understand what you meant"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_1_1556794819845"
+    },
+    {
+      "type": "standard",
+      "title": "Intent Confidence Check",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "Anything else"
+      },
+      "conditions": "intents[0].confidence<0.7",
+      "dialog_node": "node_11_1556880516079",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Greetings",
+      "output": {},
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#greetings",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_1_1556794035380",
+      "digress_out": "allow_all",
+      "previous_sibling": "node_4_1556795920413"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              },
+              {
+                "text": "Hello, My name is Florence and I'm a chat bot. What can I do to help you? You can ask me about flower suggestions or information about delivery."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "workspace_id": "f2b45b77-e5ca-4d0f-b0e4-4ce5a7bde0a3",
+  "counterexamples": [
+    {
+      "text": "no thanks"
+    }
+  ],
+  "system_settings": {
+    "tooling": {
+      "store_generic_responses": true
+    }
+  },
+  "learning_opt_out": false,
+  "status": "Available"
+}
