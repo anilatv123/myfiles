@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatbot Test APP</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <!--  <script src="chatbot.js"></script>-->
+  </head>
+  <body>
+    <main>
+      <h1 align="center">Chatbot Test APP</h1>
+  <div id="messages">
+      
+	  <div id="watson" class="watson">
+	<div class="chatdata" id="chatbox">
+		<div class="area" id="chat">
+		</div>
+	
+       <div>
+	  <form id="message" class="message">
+          <input type="html" id = "data" name="data" value="data" placeholder="Enter your message">
+          <button type="submit">Send </button>
+        </form>
+       </div>
+	  </div> </div></div>
+    </main>
+  </body>
+</html>
+<script >
+// Backend URL.
+var apiUrl = "api.php";
+// Variable for the conversation state.
+var context = "";
+
+$(function(){
+  // Initialization of the chatbot.
+  chatbot("");
+  
+  // Send a Message, When the form will be submitted.
+  $("form").submit(function(e){
+    // Prevent the form submission.
+    e.preventDefault();
+    if($("input").val()){
+      // Send the message.
+      chatbot($("input").val());
+      // Display the message.
+	  //jQuery("#chat").append("<div class=\"data chatbot\">Please enter something to proceed.</div>");
+		//	$(".chatdata").animate({scrollTop: $("#chat").height()});
+		//	});
+     $('#chat').append("<div class=\"data user\">"+$("input").val()+"</div>");
+	 $(".message").animate({scrollTop: $("#chatbox").height()});
+	jQuery("#message #data").focus();
+    }
+  })
+})
+
+// A function for sending message to the backend and getting result.
+function chatbot(message){
+  $.ajax({
+    url: apiUrl,
+    type: 'post',
+    dataType: 'json',
+    data: {
+      message: message,
+      context: context
+    },
+    //timeout:10000
+  }).done(function (response) {
+    // Check the result.
+    console.log(response);
+    if(response.error){
+      // Failed at getting result.
+      // Display a error message.
+     // $('#chat').append('<p>A communication error123 occurred.</p>');
+	 jQuery("#chat").append("<div class=\"data chatbot\">" + response.error + "</div>");
+					return false;
+    }else{
+      // Succeeded at getting result.
+      // Clear the input element.
+      $("input").val("");
+
+ if (JSON.parse(response).output.generic) {
+      if (JSON.parse(response).output.generic.length > 0) {
+	  for(k=0; k<JSON.parse(response).output.generic.length; k++){
+        switch (JSON.parse(response).output.generic[k].response_type) {
+          case 'text':
+            // It's a text response, so we just display it.
+			$('#chat').append("<div class=\"data chatbot\">"+JSON.parse(response).output.generic[k].text+"</div>");
+            //console.log(JSON.parse(response).output.generic[0].text);
+            break;
+          case 'image':
+		   $('#chat').append("<img src =\""+JSON.parse(response).output.generic[k].source+"\"/>");
+         break;
+        }
+      }
+    }
+	}
+    
+	$(".message").animate({scrollTop: $("#chatbox").height()});
+	  // Upodate the conversation state.
+	    context = JSON.stringify(JSON.parse(response).context);
+	  var messageChatbot  = "<div class=\"data chatbot\">";
+			messageChatbot		+= response.output.text[0];
+				messageChatbot		+= "</div>";
+				$(".message").animate({scrollTop: $("#chatbox").height()});
+				jQuery("#message #data").focus();
+	//updatestate();
+	}
+  }).fail(function () {
+    // Display a error message. 
+    $('#chat').append('<p>A communication error occurred.</p>');
+  });
+ 
+}
+</script>
+<style>
+.watson{
+		border: 1px solid #B0BEC5;
+		border-radius: 3px;
+		height: 50em;
+		max-height: 410px;
+		padding: 1em;
+		
+		max-width: 300px;
+		margin: 0 auto;
+		
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.watson .chatdata{
+		box-sizing: border-box;
+		overflow: hidden;
+		overflow-y: auto;
+		height: 100%;
+	}
+	
+	.watson .chatdata .area{
+		display: flex;
+		justify-content: flex-end;
+		flex-direction: column;
+		min-height: 100%;
+	}
+	
+	.watson .chatdata .data{
+		border-radius: 2px;
+		box-sizing: border-box;
+		padding: .65em;
+		margin-top: .5em;
+		
+	}
+	
+	.watson .chatdata .data:first-child{
+		margin-top: 0;
+	}
+	
+	.watson .chatdata .data.user{
+		background-color: #ECEFF1;
+		color: #1A237E;
+		
+		text-align: right;
+		transform-origin: 0% 100%;
+		-webkit-transform-origin: 0% 100%;
+		-moz-transform-origin: 0% 100%;
+		-o-transform-origin: 0% 100%;
+		-ms-transform-origin: 0% 100%;
+	}
+	
+	.watson .chatdata.data.chatbot{
+		background-color: #FF5722;
+		color: white;
+		font-weight: bold;
+		margin-left: 30%;
+		
+		transform-origin: 100% 100%;
+		-webkit-transform-origin: 100% 100%;
+		-moz-transform-origin: 100% 100%;
+		-o-transform-origin: 100% 100%;
+		-ms-transform-origin: 100% 100%;
+	}
+	
+	.watson form.message{
+		padding: 0;
+		margin-top: 1em;
+	}
+	
+	.watson form.message input{
+		border: 2px solid #476A7B;
+		border-radius: 3px;
+		padding: .5em .8em;
+		font-size: 16px;
+		display: block;
+		box-sizing: border-box;
+		width: 100%;
+	}
+	
+	.watson form.message input:focus{
+		border: 2px solid #1A237E;
+		outline: none;
+	}
+	
+	.watson form.message button{
+		background-color: #3F51B5;
+		border: none;
+		border-radius: 3px;
+		display: block;
+		padding: .5em 1em;
+		width: 100%;
+		font-size: 16px;
+		color: white;
+		margin-top: .5em;
+	}
+	
+	
+	/**Animação de message**/
+	
+	@keyframes popupmessage{
+	  0% {
+		transform:  scaleX(0.30) scaleY(0.30) ;
+	  }
+	  100% {
+		transform:  scaleX(1.00) scaleY(1.00) ;
+	  }
+	}
+
+	@-moz-keyframes popupmessage{
+	  0% {
+		-moz-transform:  scaleX(0.30) scaleY(0.30) ;
+	  }
+	  100% {
+		-moz-transform:  scaleX(1.00) scaleY(1.00) ;
+	  }
+	}
+
+	@-webkit-keyframes popupmessage {
+	  0% {
+		-webkit-transform:  scaleX(0.30) scaleY(0.30) ;
+	  }
+	  100% {
+		-webkit-transform:  scaleX(1.00) scaleY(1.00) ;
+	  }
+	}
+
+	@-o-keyframes popupmessage {
+	  0% {
+		-o-transform:  scaleX(0.30) scaleY(0.30) ;
+	  }
+	  100% {
+		-o-transform:  scaleX(1.00) scaleY(1.00) ;
+	  }
+	}
+
+	@-ms-keyframes popupmessage {
+	  0% {
+		-ms-transform:  scaleX(0.30) scaleY(0.30) ;
+	  }
+	  100% {
+		-ms-transform:  scaleX(1.00) scaleY(1.00) ;
+	  }
+	}
+</style>
+
